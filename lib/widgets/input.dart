@@ -8,6 +8,7 @@ import 'card.dart';
 import 'float_layout.dart';
 import 'list.dart';
 
+/// 选项输入 弹窗
 class OptionsDialog<T> extends StatelessWidget {
   final String title;
   final List<T> options;

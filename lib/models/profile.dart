@@ -42,6 +42,19 @@ class SubscriptionInfo with _$SubscriptionInfo {
   }
 }
 
+/// 订阅信息
+///
+/// id                      订阅ID
+/// label                   名称
+/// currentGroupName        当前选择组
+/// url                     订阅地址
+/// lastUpdateDate          最后更新时间
+/// autoUpdateDuration      自动更新时间间隔
+/// userInfo                用户的订阅信息
+/// autoUpdate              是否自动更新
+/// selectedMap             每个组选择的Proxy，如Proxies->HK,Youtube->Proxies, Global->HK专线01
+/// unfoldSet               当前展开的组
+/// isUpdating              是否正在更新
 @freezed
 class Profile with _$Profile {
   const factory Profile({

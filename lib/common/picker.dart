@@ -5,6 +5,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:fl_clash/common/common.dart';
 import 'package:image_picker/image_picker.dart';
 
+/// 封装了文件和二维码选择、保存的相关功能
 class Picker {
   Future<PlatformFile?> pickerFile() async {
     final filePickerResult = await FilePicker.platform.pickFiles(

@@ -8,6 +8,8 @@ import 'package:flutter/services.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:provider/provider.dart';
 
+/// for desktop
+/// 设置桌面应用的快捷键
 class HotKeyManager extends StatelessWidget {
   final Widget child;
 

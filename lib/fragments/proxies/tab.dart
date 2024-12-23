@@ -22,6 +22,7 @@ class ProxiesTabFragment extends StatefulWidget {
   State<ProxiesTabFragment> createState() => ProxiesTabFragmentState();
 }
 
+/// _hasMoreButtonNotifier              显示更多分组按钮
 class ProxiesTabFragmentState extends State<ProxiesTabFragment>
     with TickerProviderStateMixin {
   TabController? _tabController;
@@ -34,11 +35,13 @@ class ProxiesTabFragmentState extends State<ProxiesTabFragment>
     _destroyTabController();
   }
 
+  // 滚动到选中的Proxy
   scrollToGroupSelected() {
     final currentGroupName = globalState.appController.config.currentGroupName;
     _keyMap[currentGroupName]?.currentState?.scrollToSelected();
   }
 
+  // 显示更多分组的按钮
   _buildMoreButton() {
     return Selector<AppState, bool>(
       selector: (_, appState) => appState.viewMode == ViewMode.mobile,
@@ -57,6 +60,7 @@ class ProxiesTabFragmentState extends State<ProxiesTabFragment>
     );
   }
 
+  // 布局设置：风格 排序 布局 尺寸 图标样式
   _showMoreMenu() {
     showSheet(
       context: context,
@@ -188,11 +192,13 @@ class ProxiesTabFragmentState extends State<ProxiesTabFragment>
           children: [
             NotificationListener<ScrollMetricsNotification>(
               onNotification: (scrollNotification) {
+                // > 0 说明可滚动
                 _hasMoreButtonNotifier.value =
                     scrollNotification.metrics.maxScrollExtent > 0;
                 return true;
               },
               child: ValueListenableBuilder(
+                // 当值发生变化时，会rebuild
                 valueListenable: _hasMoreButtonNotifier,
                 builder: (_, value, child) {
                   return Stack(
@@ -255,6 +261,7 @@ class ProxiesTabFragmentState extends State<ProxiesTabFragment>
   }
 }
 
+// Tab页面内容
 class ProxyGroupView extends StatefulWidget {
   final String groupName;
 
@@ -387,6 +394,8 @@ class ProxyGroupViewState extends State<ProxyGroupView> {
   }
 }
 
+// 延迟测试按钮
+// 点击测试按钮时，按钮会缩小，然后执行测试，测试完成后按钮会恢复原状
 class DelayTestButton extends StatefulWidget {
   final Future Function() onClick;
 

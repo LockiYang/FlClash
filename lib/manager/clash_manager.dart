@@ -7,6 +7,10 @@ import 'package:provider/provider.dart';
 
 import '../../common/function.dart';
 
+/// 监听并动态更新 Clash内核 的状态
+/// 监听并动态更新 Clash内核 的配置文件
+/// 监听 切换配置文件
+/// Clash 内核事件监听
 class ClashManager extends StatefulWidget {
   final Widget child;
 
@@ -22,6 +26,7 @@ class ClashManager extends StatefulWidget {
 class _ClashContainerState extends State<ClashManager> with AppMessageListener {
   Function? updateDelayDebounce;
 
+  // 更新Clash内核 配置文件，首次会执行
   Widget _updateContainer(Widget child) {
     return Selector2<Config, ClashConfig, ClashConfigState>(
       selector: (_, config, clashConfig) => ClashConfigState(
@@ -57,6 +62,7 @@ class _ClashContainerState extends State<ClashManager> with AppMessageListener {
     );
   }
 
+  // 切换Clash配置文件
   Widget _changeProfileContainer(Widget child) {
     return Selector<Config, String?>(
       selector: (_, config) => config.currentProfileId,

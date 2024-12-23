@@ -13,6 +13,8 @@ typedef OnSelected = void Function(int index);
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
+  // 移动端底部导航
+  // 桌面版侧边导航
   _getNavigationBar({
     required BuildContext context,
     required ViewMode viewMode,

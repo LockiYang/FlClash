@@ -17,6 +17,10 @@ import 'package:url_launcher/url_launcher.dart';
 import 'common/common.dart';
 import 'models/models.dart';
 
+/// updateClashConfigDebounce             防抖：globalState.updateClashConfig
+/// updateGroupDebounce                   防抖：globalState.updateGroups
+/// addCheckIpNumDebounce                 防抖：appState.checkIpNum++
+/// applyProfileDebounce                  防抖：globalState.applyProfile
 class AppController {
   final BuildContext context;
   late AppState appState;
@@ -67,6 +71,7 @@ class AppController {
     );
   }
 
+  // 启动和停止Clash Core
   updateStatus(bool isStart) async {
     if (isStart) {
       await globalState.handleStart();
@@ -101,6 +106,7 @@ class AppController {
     }
   }
 
+  // 更新Clash运行时间
   updateRunTime() {
     final startTime = globalState.startTime;
     if (startTime != null) {
@@ -112,6 +118,7 @@ class AppController {
     }
   }
 
+  // 更新流量
   updateTraffic() {
     globalState.updateTraffic(
       config: config,
@@ -143,6 +150,7 @@ class AppController {
     globalState.updateProviders(appState);
   }
 
+  // 网络更新Profile
   Future<void> updateProfile(Profile profile) async {
     final newProfile = await profile.update();
     config.setProfile(
@@ -184,6 +192,7 @@ class AppController {
     addCheckIpNumDebounce();
   }
 
+  // 切换Profile，监听到Profile变化后，会自动更新Clash Core的配置
   changeProfile(String? value) async {
     if (value == config.currentProfileId) return;
     config.currentProfileId = value;
@@ -213,6 +222,7 @@ class AppController {
     }
   }
 
+  // 读取Clash Core的ProxyGroups
   updateProfiles() async {
     for (final profile in config.profiles) {
       if (profile.type == ProfileType.file) {
@@ -259,6 +269,7 @@ class AppController {
     }
   }
 
+  // 退出应用
   handleExit() async {
     try {
       await updateStatus(false);
@@ -270,6 +281,7 @@ class AppController {
     system.exit();
   }
 
+  // 应用更新
   autoCheckUpdate() async {
     if (!config.appSetting.autoCheckUpdate) return;
     final res = await request.checkForUpdate();
@@ -410,6 +422,7 @@ class AppController {
     globalState.showSnackBar(context, message: message);
   }
 
+  // 免责声明
   Future<bool> showDisclaimer() async {
     return await globalState.showCommonDialog<bool>(
           dismissible: false,
@@ -508,6 +521,7 @@ class AppController {
     });
   }
 
+  // 按名称排序
   List<Proxy> _sortOfName(List<Proxy> proxies) {
     return List.of(proxies)
       ..sort(
@@ -518,6 +532,7 @@ class AppController {
       );
   }
 
+  // 按延迟排序
   List<Proxy> _sortOfDelay(List<Proxy> proxies) {
     return proxies = List.of(proxies)
       ..sort(
@@ -538,6 +553,7 @@ class AppController {
       );
   }
 
+  // 获取排序后的Proxy
   List<Proxy> getSortProxies(List<Proxy> proxies) {
     return switch (config.proxiesStyle.sortType) {
       ProxiesSortType.none => proxies,
@@ -546,6 +562,7 @@ class AppController {
     };
   }
 
+  // 获取策略组选中的proxy
   String getCurrentSelectedName(String groupName) {
     final group = appState.getGroupWithName(groupName);
     return group?.getCurrentSelectedName(
@@ -566,18 +583,21 @@ class AppController {
     });
   }
 
+  // desktop: 开关Tun虚拟网卡，仅支持windows
   updateTun() {
     clashConfig.tun = clashConfig.tun.copyWith(
       enable: !clashConfig.tun.enable,
     );
   }
 
+  // desktop: 开关系统代理
   updateSystemProxy() {
     config.networkProps = config.networkProps.copyWith(
       systemProxy: !config.networkProps.systemProxy,
     );
   }
 
+  // 开关代理
   updateStart() {
     updateStatus(!appFlowingState.isStart);
   }
@@ -590,12 +610,14 @@ class AppController {
     addCheckIpNumDebounce();
   }
 
+  // 开关自启动
   updateAutoLaunch() {
     config.appSetting = config.appSetting.copyWith(
       autoLaunch: !config.appSetting.autoLaunch,
     );
   }
 
+  // 窗口显示和隐藏
   updateVisible() async {
     final visible = await window?.isVisible();
     if (visible != null && !visible) {
@@ -605,6 +627,7 @@ class AppController {
     }
   }
 
+  // 逐个切换模式，快捷键用：Global、Rule、Direct
   updateMode() {
     final index = Mode.values.indexWhere((item) => item == clashConfig.mode);
     if (index == -1) {
@@ -614,6 +637,7 @@ class AppController {
     clashConfig.mode = Mode.values[nextIndex];
   }
 
+  // 导出Clash Core日志
   Future<bool> exportLogs() async {
     final logsRaw = appFlowingState.logs.map(
       (item) => item.toString(),
@@ -629,6 +653,7 @@ class AppController {
         null;
   }
 
+  // 备份数据
   Future<List<int>> backupData() async {
     final homeDirPath = await appPath.getHomeDirPath();
     final profilesPath = await appPath.getProfilesPath();
@@ -644,6 +669,7 @@ class AppController {
     });
   }
 
+  // 更新系统托盘
   updateTray([bool focus = false]) async {
     tray.update(
       appState: appState,
@@ -654,6 +680,7 @@ class AppController {
     );
   }
 
+  // 恢复数据
   recoveryData(
     List<int> data,
     RecoveryOption recoveryOption,

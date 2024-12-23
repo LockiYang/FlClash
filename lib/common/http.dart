@@ -5,6 +5,9 @@ import 'package:flutter/cupertino.dart';
 import '../state.dart';
 import 'constant.dart';
 
+/// 自定义HttpClient，dio和http都会使用这个
+/// 1.忽略无效的 SSL 证书
+/// 2.设置代理
 class FlClashHttpOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) {

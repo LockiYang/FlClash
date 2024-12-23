@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 import 'chip.dart';
 import 'list.dart';
 
+/// 连接和请求的列表项
 class ConnectionItem extends StatelessWidget {
   final Connection connection;
   final Function(String)? onClick;

@@ -4,6 +4,7 @@ import 'package:fl_clash/state.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
+/// 二维码扫描
 class ScanPage extends StatefulWidget {
   const ScanPage({super.key});
 

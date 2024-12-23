@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'card.dart';
 
+/// 代理页面 设置选项 带ICON的卡片
 class SettingInfoCard extends StatelessWidget {
   final Info info;
   final bool? isSelected;
@@ -45,6 +46,7 @@ class SettingInfoCard extends StatelessWidget {
   }
 }
 
+/// 设置选项 纯文字的卡片
 class SettingTextCard extends StatelessWidget {
   final String text;
   final bool? isSelected;

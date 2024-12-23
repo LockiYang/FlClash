@@ -15,6 +15,18 @@ import 'common/common.dart';
 import 'controller.dart';
 import 'models/models.dart';
 
+/// 全局单例对象
+///
+/// timer                 每秒执行一次updateFunctionLists: updateTraffic updateRunTime
+/// isVpnService          是否是启动Android VPNService
+/// packageInfo           包信息
+/// pageController        页面控制器
+/// measure               文本缩放比例
+/// startTime             ClashCore启动时间
+/// navigatorKey          MaterialApp的navigatorKey
+/// homeScaffoldKey       主页的Scaffold的key
+/// lastTunEnable         上一次Tun是否启用
+/// lastProfileModified   上一次修改的Profile的时间戳
 class GlobalState {
   Timer? timer;
   Timer? groupsUpdateTimer;
@@ -64,6 +76,9 @@ class GlobalState {
     );
   }
 
+  // 更新Clash配置到ClashCore
+  // isPatch: true 为增量更新，false 为全量更新
+  // 传递currentProfileId，ClashCore会自动寻找对应的profile文件
   Future<void> updateClashConfig({
     required AppState appState,
     required ClashConfig clashConfig,
@@ -116,6 +131,7 @@ class GlobalState {
     lastProfileModified = await config.getCurrentProfile()?.profileLastModified;
   }
 
+  // 启动ClashCore
   handleStart() async {
     await clashCore.startListener();
     if (globalState.isVpnService) {
@@ -145,10 +161,12 @@ class GlobalState {
     }
   }
 
+  // 读取ClashCore的运行时间
   updateStartTime() {
     startTime = clashLib?.getRunTime();
   }
 
+  // 停止ClashCore
   Future handleStop() async {
     startTime = null;
     await clashCore.stopListener();
@@ -173,10 +191,12 @@ class GlobalState {
     await updateProviders(appState);
   }
 
+  // 读取ClashCore的ExternalProviders
   updateProviders(AppState appState) async {
     appState.providers = await clashCore.getExternalProviders();
   }
 
+  // 初始化ClashCore
   init({
     required AppState appState,
     required Config config,
@@ -205,10 +225,12 @@ class GlobalState {
     }
   }
 
+  // 读取ClashCore的ProxyGroups
   Future<void> updateGroups(AppState appState) async {
     appState.groups = await clashCore.getProxiesGroups();
   }
 
+  // 显示消息提示
   showMessage({
     required String title,
     required InlineSpan message,
@@ -250,6 +272,7 @@ class GlobalState {
     );
   }
 
+  // 切换ClashCore中的Proxy
   changeProxy({
     required Config config,
     required String groupName,
@@ -266,6 +289,7 @@ class GlobalState {
     }
   }
 
+  // 显示通用对话框
   Future<T?> showCommonDialog<T>({
     required Widget child,
     bool dismissible = true,
@@ -281,6 +305,7 @@ class GlobalState {
     );
   }
 
+  // 读取ClashCore的流量信息
   updateTraffic({
     required Config config,
     AppFlowingState? appFlowingState,
@@ -301,6 +326,7 @@ class GlobalState {
     }
   }
 
+  // 显示底部消息通知
   showSnackBar(
     BuildContext context, {
     required String message,
@@ -332,6 +358,7 @@ class GlobalState {
     );
   }
 
+  // 执行异步方法并捕获异常，显示错误提示
   Future<T?> safeRun<T>(
     FutureOr<T> Function() futureFunction, {
     String? title,
@@ -350,6 +377,7 @@ class GlobalState {
     }
   }
 
+  // 打开外部链接
   openUrl(String url) {
     showMessage(
       message: TextSpan(text: url),

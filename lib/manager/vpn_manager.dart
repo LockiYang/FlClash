@@ -6,6 +6,9 @@ import 'package:provider/provider.dart';
 
 import '../../common/function.dart';
 
+/// for android
+/// 当 Android 修改 VPN 配置后，提示用户重启VPN
+/// Android提示：重启VPN后改变生效
 class VpnManager extends StatefulWidget {
   final Widget child;
 

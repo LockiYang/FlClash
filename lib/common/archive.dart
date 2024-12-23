@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:archive/archive_io.dart';
 import 'package:path/path.dart';
 
+/// 压缩文件夹
 extension ArchiveExt on Archive {
   addDirectoryToArchive(String dirPath, String parentPath) {
     final dir = Directory(dirPath);

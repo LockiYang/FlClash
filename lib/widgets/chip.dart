@@ -1,6 +1,7 @@
 import 'package:fl_clash/enum/enum.dart';
 import 'package:flutter/material.dart';
 
+/// Chip或者ActionChip（小按钮）
 class CommonChip extends StatelessWidget {
   final String label;
   final VoidCallback? onPressed;

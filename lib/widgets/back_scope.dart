@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:fl_clash/state.dart';
 import 'package:flutter/widgets.dart';
 
+/// 处理Android返回键
 class BackScope extends StatefulWidget {
   final Widget child;
 

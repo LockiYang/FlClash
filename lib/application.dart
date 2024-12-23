@@ -110,6 +110,7 @@ class ApplicationState extends State<Application> {
     });
   }
 
+  // 20s更新一次策略组
   _initTimer() {
     _cancelTimer();
     timer = Timer.periodic(const Duration(milliseconds: 20000), (_) {

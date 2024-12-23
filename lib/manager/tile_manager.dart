@@ -2,6 +2,8 @@ import 'package:fl_clash/plugins/tile.dart';
 import 'package:fl_clash/state.dart';
 import 'package:flutter/material.dart';
 
+/// for android
+/// Android的磁帖
 class TileManager extends StatefulWidget {
   final Widget child;
 

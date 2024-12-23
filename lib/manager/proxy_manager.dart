@@ -3,6 +3,8 @@ import 'package:fl_clash/models/models.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+/// for desktop
+/// 监听配置动态设置系统代理
 class ProxyManager extends StatelessWidget {
   final Widget child;
 

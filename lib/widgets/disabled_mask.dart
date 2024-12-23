@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// 当 status 为 true 时，子组件会被灰色蒙版覆盖
 class DisabledMask extends StatefulWidget {
   final Widget child;
   final bool status;

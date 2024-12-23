@@ -12,6 +12,7 @@ class CommonPopupMenuItem<T> {
   });
 }
 
+/// 配置页面 弹出式菜单
 class CommonPopupMenu<T> extends StatefulWidget {
   final List<CommonPopupMenuItem> items;
   final PopupMenuItemSelected<T> onSelected;
