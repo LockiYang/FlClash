@@ -42,6 +42,16 @@ import kotlinx.coroutines.withContext
 import java.io.File
 import java.util.zip.ZipFile
 
+// Dart调用原生：onMethodCall
+// moveTaskToBack：将当前任务移动到后台
+// updateExcludeFromRecents：设置应用是否从最近任务中排除
+// getPackages：异步获取已安装的应用信息
+// getChinaPackageNames：异步获取与中国相关的包名列表
+// getPackageIcon：根据包名获取应用图标
+// tip：显示Toast
+// openFile：打开指定路径的文件
+
+// 原生调用Dart：MethodChannel
 class AppPlugin : FlutterPlugin, MethodChannel.MethodCallHandler, ActivityAware {
 
     private var activity: Activity? = null
@@ -119,7 +129,9 @@ class AppPlugin : FlutterPlugin, MethodChannel.MethodCallHandler, ActivityAware 
 
     private var isBlockNotification: Boolean = false
 
+    // 初始化插件
     override fun onAttachedToEngine(flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
+        // 协程作用域，用于处理异步任务
         scope = CoroutineScope(Dispatchers.Default)
         context = flutterPluginBinding.applicationContext
         channel = MethodChannel(flutterPluginBinding.binaryMessenger, "app")
@@ -135,12 +147,13 @@ class AppPlugin : FlutterPlugin, MethodChannel.MethodCallHandler, ActivityAware 
         ShortcutManagerCompat.setDynamicShortcuts(context, listOf(shortcut))
     }
 
-
+    // 清理资源
     override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
         channel.setMethodCallHandler(null)
         scope.cancel()
     }
 
+    // flutterEngine未初始化时提示信息
     private fun tip(message: String?) {
         if (GlobalState.flutterEngine == null) {
             Toast.makeText(context, message, Toast.LENGTH_LONG).show()
@@ -419,6 +432,9 @@ class AppPlugin : FlutterPlugin, MethodChannel.MethodCallHandler, ActivityAware 
         return false
     }
 
+    // Flutter插件的一种机制：用于在插件附加到 Activity 时触发回调
+    // 注册接收Activity结果监听：VpnPlugin.start时会requestVpnPermission（请求VPN权限），监听startActivityForResult
+    // 注册权限请求结果监听:ServicePlugin.init会调用requestNotificationsPermission（请求通知权限）
     override fun onAttachedToActivity(binding: ActivityPluginBinding) {
         activity = binding.activity
         binding.addActivityResultListener(::onActivityResult)

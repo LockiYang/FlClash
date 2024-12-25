@@ -15,7 +15,7 @@ final defaultAppSetting = const AppSetting().copyWith(
 );
 
 /// App应用设置
-/// 
+///
 /// locale            语言
 /// onlyProxy         是否只统计代理流量
 /// autoLaunch        自启动 desktop
@@ -210,8 +210,8 @@ class ThemeProps with _$ThemeProps {
 ///       allowBypass     for android：允许应用绕过VPN
 /// _networkProps         网络配置 for desktop
 ///       systemProxy     for desktop：是否为系统代理
-///       bypassDomain    for desktop：绕过代理的域名
-/// _desktopProps         for desktop 系统代理的开关 
+///       bypassDomain    for desktop：绕过代理的域名，仅在系统代理启用时生效
+/// _desktopProps         for desktop 系统代理的开关
 /// _overrideDns          是否覆盖DNS
 /// _hotKeyActions        快捷键配置
 /// _proxiesStyle         代理样式配置
