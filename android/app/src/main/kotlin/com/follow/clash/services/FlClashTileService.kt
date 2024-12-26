@@ -42,6 +42,8 @@ class FlClashTileService : TileService() {
     }
 
     // 启动TempActivity
+    // PendingIntent：一种延迟执行的 Intent，允许外部应用（如通知或快捷方式）触发此 Intent
+    // Android 14以上：启动活动并关闭快速设置面板
     @SuppressLint("StartActivityAndCollapseDeprecated")
     private fun activityTransfer() {
         val intent = Intent(this, TempActivity::class.java)
@@ -63,8 +65,10 @@ class FlClashTileService : TileService() {
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
             // 启动活动 并 关闭当前的快速设置面板
+            // Android 14 及以上，支持 PendingIntent
             startActivityAndCollapse(pendingIntent)
         } else {
+            // Android 14 以下，仅支持普通 Intent
             startActivityAndCollapse(intent)
         }
     }

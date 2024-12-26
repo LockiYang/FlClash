@@ -42,16 +42,17 @@ import kotlinx.coroutines.withContext
 import java.io.File
 import java.util.zip.ZipFile
 
-// Dart调用原生：onMethodCall
+// onMethodCall : Dart调用原生
 // moveTaskToBack：将当前任务移动到后台
 // updateExcludeFromRecents：设置应用是否从最近任务中排除
+// initShortcuts：
 // getPackages：异步获取已安装的应用信息
 // getChinaPackageNames：异步获取与中国相关的包名列表
 // getPackageIcon：根据包名获取应用图标
 // tip：显示Toast
 // openFile：打开指定路径的文件
 
-// 原生调用Dart：MethodChannel
+// MethodChannel : 原生调用Dart
 class AppPlugin : FlutterPlugin, MethodChannel.MethodCallHandler, ActivityAware {
 
     private var activity: Activity? = null
@@ -138,6 +139,8 @@ class AppPlugin : FlutterPlugin, MethodChannel.MethodCallHandler, ActivityAware 
         channel.setMethodCallHandler(this)
     }
 
+    // 动态快捷方式（Dynamic Shortcut）
+    // Intent：打开 TempActivity，Action("CHANGE")
     private fun initShortcuts(label: String) {
         val shortcut = ShortcutInfoCompat.Builder(context, "toggle")
             .setShortLabel(label)
