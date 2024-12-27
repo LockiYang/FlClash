@@ -47,7 +47,7 @@ object GlobalState {
         return serviceEngine?.plugins?.get(VpnPlugin::class.java) as VpnPlugin?
     }
 
-    // 磁贴开关
+    // VPN开关 磁贴
     fun handleToggle(context: Context) {
         val starting = handleStart(context)
         if (!starting) {

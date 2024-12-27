@@ -40,6 +40,7 @@ class FlClashVpnService : VpnService(), BaseServiceInterface {
         GlobalState.initServiceEngine(applicationContext)
     }
 
+    // 启动 VPNService
     override fun start(options: VpnOptions): Int {
         return with(Builder()) {
             // with(对象)

@@ -116,6 +116,7 @@ Future<void> vpnService() async {
 
   vpn?.setServiceMessageHandler(
     ServiceMessageHandler(
+      // 最终会调用 VPNService.protect(fd)
       onProtect: (Fd fd) async {
         await vpn?.setProtect(fd.value);
         clashLib?.setFdMap(fd.id);
@@ -129,6 +130,7 @@ Future<void> vpnService() async {
           ),
         );
       },
+      // 在代理组加载完成后触发，用于设置默认代理组或更新代理配置
       onLoaded: (String groupName) {
         final currentSelectedMap = config.currentSelectedMap;
         final proxyName = currentSelectedMap[groupName];

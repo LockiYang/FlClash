@@ -31,6 +31,11 @@ import 'package:flutter/services.dart';
 /// gc：
 /// dnsChanged：
 /// 
+/// receiver：监听来自 Clash 核心的消息
+/// onProtect：保护 Clash 核心流量不被路由到 TUN 接口
+/// onProcess：用于解析 TUN 流量的进程信息（如来源 IP、端口、协议等）
+/// onStarted：在 TUN 接口启动成功后触发，表示 Clash 的 TUN 模式正式运行
+/// onLoaded：在 Clash 核心加载成功后触发，表示 Clash 核心已经加载完成
 class Vpn {
   static Vpn? _instance;
   late MethodChannel methodChannel;

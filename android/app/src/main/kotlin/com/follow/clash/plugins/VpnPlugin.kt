@@ -32,7 +32,7 @@ import java.net.InetSocketAddress
 import kotlin.concurrent.withLock
 
 // Dart调用原生：onMethodCall
-// start：
+// start：bindService、start VPNService、回调Dart started(startTun)
 // stop：
 // setProtect：
 // startForeground：

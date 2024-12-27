@@ -5,8 +5,9 @@ import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 
-// 开关磁贴插件，点击磁贴时：handleStart、handleStop、handleDetached
-// 调用Dart代码
+// 开关磁贴插件，
+// 点击磁贴时调用Dart代码：handleStart、handleStop调用FFI startCore
+//
 // MethodChannel：原生调用Dart
 // onMethodCall：Dart调用原生
 class TilePlugin(private val onStart: (() -> Unit)? = null, private val onStop: (() -> Unit)? = null) : FlutterPlugin,
