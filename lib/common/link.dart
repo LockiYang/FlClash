@@ -5,6 +5,9 @@ import 'package:flutter/material.dart';
 
 typedef InstallConfigCallBack = void Function(String url);
 
+/// for android
+/// 监听Android和iOS的App Link
+/// 从应用外部打开应用时，可以通过App Link传递订阅地址
 class LinkManager {
   static LinkManager? _instance;
   late AppLinks _appLinks;

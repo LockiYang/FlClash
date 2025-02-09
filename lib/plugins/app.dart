@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
+/// for android
+/// App插件
 class App {
   static App? _instance;
   late MethodChannel methodChannel;

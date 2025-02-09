@@ -6,6 +6,9 @@ import 'package:path_provider/path_provider.dart';
 
 import 'constant.dart';
 
+/// ClashCore go代码共享路径
+/// getProfileProvidersPath
+/// getProfilePath
 class AppPath {
   static AppPath? _instance;
   Completer<Directory> dataDir = Completer();

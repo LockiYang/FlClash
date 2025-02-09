@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// 绝对定位，浮动
 class FloatLayout extends StatelessWidget {
   final Widget floatingWidget;
 

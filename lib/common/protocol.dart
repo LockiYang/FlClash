@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:win32_registry/win32_registry.dart';
 
+/// 在 Windows 系统中创建自定义协议，例如 myapp://，
+/// 使得外部程序或浏览器可以通过此协议调用对应的应用程序
 class Protocol {
   static Protocol? _instance;
 

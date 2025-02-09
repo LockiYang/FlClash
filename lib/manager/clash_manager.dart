@@ -8,6 +8,9 @@ import 'package:provider/provider.dart';
 
 import '../../common/function.dart';
 
+/// 监听并动态更新 ClashCore 的配置文件
+/// 监听 切换配置文件
+/// ClashCore 事件监听：onStarted、onLog、onRequest、onDelay、onLoaded
 class ClashManager extends StatefulWidget {
   final Widget child;
 

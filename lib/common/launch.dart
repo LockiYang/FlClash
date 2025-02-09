@@ -6,6 +6,8 @@ import 'package:launch_at_startup/launch_at_startup.dart';
 import 'constant.dart';
 import 'system.dart';
 
+/// for desktop
+/// 自动启动和管理员自动启动
 class AutoLaunch {
   static AutoLaunch? _instance;
 

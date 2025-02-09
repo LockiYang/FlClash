@@ -14,6 +14,8 @@ abstract mixin class TileListener {
   }
 }
 
+/// for android
+/// 磁贴，通知栏快捷菜单插件
 class Tile {
 
   final MethodChannel _channel = const MethodChannel('tile');

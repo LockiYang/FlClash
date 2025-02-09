@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tray_manager/tray_manager.dart';
 
+/// for desktop
+/// 系统托盘
 class TrayManager extends StatefulWidget {
   final Widget child;
 

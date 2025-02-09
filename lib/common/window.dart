@@ -6,6 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:screen_retriever/screen_retriever.dart';
 import 'package:window_manager/window_manager.dart';
 
+/// for desktop
+/// 初始化窗口的位置、大小、标题栏样式
+/// 定义窗口的显示、隐藏、关闭方法
 class Window {
   init(WindowProps props, int version) async {
     final acquire = await singleInstanceLock.acquire();

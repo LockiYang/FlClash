@@ -6,6 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
+/// for android
+/// SystemUiMode.edgeToEdge：使得界面布局延伸到系统状态栏和导航栏的位置，让应用内容显示在整个屏幕上。
+/// 当config.appSetting.hidden为true时，app?.updateExcludeFromRecents(hidden)会将应用排除在最近任务列表中。
 class AndroidManager extends StatefulWidget {
   final Widget child;
 

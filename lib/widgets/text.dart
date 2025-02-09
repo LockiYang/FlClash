@@ -33,6 +33,7 @@ class TooltipText extends StatelessWidget {
   }
 }
 
+/// 将普通文本和 emoji 进行分隔，并且为 emoji 设置特定的字体 Twemoji
 class EmojiText extends StatelessWidget {
   final String text;
   final TextStyle? style;

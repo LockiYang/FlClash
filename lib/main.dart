@@ -60,6 +60,10 @@ Future<void> main() async {
   );
 }
 
+// 原生调用Dart的入口
+// 利用 DartExecutor 动态绑定 Dart 函数，灵活实现跨平台调用
+// VpnPlugin.start 时调用此函数
+// 确保不会被树摇优化（编译优化，移除未使用的代码）去除
 @pragma('vm:entry-point')
 Future<void> _service(List<String> flags) async {
   globalState.isService = true;

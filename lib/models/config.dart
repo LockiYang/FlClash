@@ -39,6 +39,22 @@ List<DashboardWidget> dashboardWidgetsRealFormJson(
   }
 }
 
+/// App应用设置
+///
+/// locale            语言
+/// onlyProxy         是否只统计代理流量
+/// autoLaunch        自启动 desktop
+/// adminAutoLaunch   管理员自启动 desktop
+/// silentLaunch      静默启动，不显示窗口 desktop
+/// autoRun           启动时自动运行VPN
+/// openLogs
+/// closeConnections  切换节点后是否关闭所有连接
+/// testUrl           测速链接
+/// isAnimateToPage   Android页面切换动画
+/// autoCheckUpdate   自动检查更新
+/// showLabel         是否显示菜单名称 desktop
+/// disclaimerAccepted
+/// minimizeOnExit    退出时最小化 desktop
 @freezed
 class AppSetting with _$AppSetting {
   const factory AppSetting({
@@ -203,6 +219,30 @@ class ThemeProps with _$ThemeProps {
   }
 }
 
+/// App配置状态管理
+///
+/// _appSetting           应用设置
+/// _profiles             Clash配置文件列表
+/// _currentProfileId     当前配置文件ID
+/// _themeMode            主题模式
+/// _primaryColor         主题色彩
+/// _isAccessControl      Android的应用访问控制
+/// _accessControl        Android的应用访问控制
+/// _dav                  DAV备份配置
+/// _windowProps          窗口配置 for desktop
+/// _themeProps           主题设置
+/// _vpnProps             VPN配置：启用、允许应用绕过VPN、系统代理（为VPNService附加HTTP代理）
+///       enable          for android：开启 android的 VPNService，desktop的tun模式配置在clashConfig
+///       systemProxy     for android：是否为VPNService附加HTTP代理
+///       ipv6            for android：是否启用IPv6
+///       allowBypass     for android：允许应用绕过VPN
+/// _networkProps         网络配置 for desktop
+///       systemProxy     for desktop：是否为系统代理
+///       bypassDomain    for desktop：绕过代理的域名，仅在系统代理启用时生效
+/// _desktopProps         for desktop 系统代理的开关
+/// _overrideDns          是否覆盖DNS
+/// _hotKeyActions        快捷键配置
+/// _proxiesStyle         代理样式配置
 @JsonSerializable()
 class Config extends ChangeNotifier {
   AppSetting _appSetting;

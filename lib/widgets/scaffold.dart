@@ -8,6 +8,10 @@ import 'package:flutter/services.dart';
 import '../enum/enum.dart';
 import 'chip.dart';
 
+/// 页面的基础布局，包含顶部栏、底部栏、侧边栏、加载状态
+/// leading                       顶部栏左侧的组件
+/// actions                       顶部栏右侧的操作按钮列表
+/// automaticallyImplyLeading     是否自动添加返回按钮
 class CommonScaffold extends StatefulWidget {
   final Widget body;
   final Widget? bottomNavigationBar;
@@ -107,6 +111,8 @@ class CommonScaffoldState extends State<CommonScaffold> {
     );
   }
 
+  // 在执行异步任务时，显示 LinearProgressIndicator。
+  // 如果异步任务抛出异常，捕获并通过 globalState.showMessage 显示错误信息。
   Future<T?> loadingRun<T>(
     Future<T> Function() futureFunction, {
     String? title,

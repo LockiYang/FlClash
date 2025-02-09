@@ -29,6 +29,7 @@ class FindProcessBuilder extends StatelessWidget {
   }
 }
 
+/// 连接和请求的列表项?
 class ConnectionItem extends StatelessWidget {
   final Connection connection;
   final Function(String)? onClick;

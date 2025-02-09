@@ -1,6 +1,7 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 
+/// 淡入淡出
 class FadeBox extends StatelessWidget {
   final Widget child;
 

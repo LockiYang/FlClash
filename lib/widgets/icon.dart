@@ -2,6 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fl_clash/common/common.dart';
 import 'package:flutter/material.dart';
 
+/// src是 base64 编码的图片
+/// 或者是网络图片地址
+/// 如果src为空，显示默认图标
 class CommonTargetIcon extends StatelessWidget {
   final String src;
   final double size;
