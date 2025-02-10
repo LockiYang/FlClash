@@ -21,15 +21,20 @@ import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 
-
+// 普通的Clash服务
+// 将服务启动为前台服务，并持续显示前台通知
+// 似乎没有启动clash？？
 class FlClashService : Service(), BaseServiceInterface {
 
     private val binder = LocalBinder()
 
+    // Binder 用于跨组件通信
+    // 外部组件（如Activity）可通过Binder获取该服务的引用
     inner class LocalBinder : Binder() {
         fun getService(): FlClashService = this@FlClashService
     }
 
+    // 服务绑定时返回binder
     override fun onBind(intent: Intent): IBinder {
         return binder
     }
@@ -42,10 +47,12 @@ class FlClashService : Service(), BaseServiceInterface {
 
     private val notificationId: Int = 1
 
+    // 构建用于前台服务的通知
     private val notificationBuilderDeferred: Deferred<NotificationCompat.Builder> by lazy {
         CoroutineScope(Dispatchers.Main).async {
             val stopText = GlobalState.getText("stop")
 
+            // intent指定点击通知应该打开的MainActivity
             val intent = Intent(
                 this@FlClashService, MainActivity::class.java
             )
@@ -91,8 +98,11 @@ class FlClashService : Service(), BaseServiceInterface {
         return notificationBuilderDeferred.await()
     }
 
+    // 直接返回0
     override fun start(options: VpnOptions) = 0
 
+    // 停止当前服务
+    // 移除前台通知，停止前台服务
     override fun stop() {
         stopSelf()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -100,6 +110,7 @@ class FlClashService : Service(), BaseServiceInterface {
         }
     }
 
+    // 将服务启动为前台服务，并持续显示前台通知
     @SuppressLint("ForegroundServiceType", "WrongConstant")
     override suspend fun startForeground(title: String, content: String) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

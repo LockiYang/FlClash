@@ -31,15 +31,21 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
-
+// VPNService + Clash 服务
 class FlClashVpnService : VpnService(), BaseServiceInterface {
     override fun onCreate() {
         super.onCreate()
+        // 创建时 执行dart：vpnService
+        // Dart虚拟机执行 vpnService入口点 -> 通过FFI调用本地库
         GlobalState.initServiceEngine()
     }
 
+    // 启动 VPNService
     override fun start(options: VpnOptions): Int {
         return with(Builder()) {
+            // with(对象)
+            // 可以直接访问对象的成员，不需要每次都写对象名
+            // 调用对象的方法或访问属性
             if (options.ipv4Address.isNotEmpty()) {
                 val cidr = options.ipv4Address.toCIDR()
                 addAddress(cidr.address, cidr.prefixLength)
@@ -100,6 +106,7 @@ class FlClashVpnService : VpnService(), BaseServiceInterface {
                     )
                 )
             }
+            // 启动VPNService，获取底层的文件描述符
             establish()?.detachFd()
                 ?: throw NullPointerException("Establish VPN rejected by system")
         }
@@ -116,6 +123,9 @@ class FlClashVpnService : VpnService(), BaseServiceInterface {
 
     private val notificationId: Int = 1
 
+    // 两个intent
+    // intent：点击通知打开MainActivity
+    // stopIntent：停止按钮
     private val notificationBuilderDeferred: Deferred<NotificationCompat.Builder> by lazy {
         CoroutineScope(Dispatchers.Main).async {
             val stopText = GlobalState.getText("stop")
@@ -163,6 +173,7 @@ class FlClashVpnService : VpnService(), BaseServiceInterface {
         return notificationBuilderDeferred.await()
     }
 
+    // 启动前台服务和通知
     @SuppressLint("ForegroundServiceType", "WrongConstant")
     override suspend fun startForeground(title: String, content: String) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -186,6 +197,7 @@ class FlClashVpnService : VpnService(), BaseServiceInterface {
         }
     }
 
+    // 应用占用过多内存会被调用
     override fun onTrimMemory(level: Int) {
         super.onTrimMemory(level)
         GlobalState.getCurrentVPNPlugin()?.requestGc()

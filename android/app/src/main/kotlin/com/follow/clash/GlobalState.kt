@@ -18,11 +18,14 @@ enum class RunState {
     STOP
 }
 
-
+// object 用于创建单例对象或静态工具类
+// 不需要手动实例化、自动是一个单例对象
 object GlobalState {
     val runLock = ReentrantLock()
 
     val runState: MutableLiveData<RunState> = MutableLiveData<RunState>(RunState.STOP)
+    // 在MainActivity中初始化
+    // FlutterEngine会创建一个独立的Dart虚拟机，用于执行Dart代码，destroy后虚拟机停止运行。
     var flutterEngine: FlutterEngine? = null
     private var serviceEngine: FlutterEngine? = null
 
@@ -44,6 +47,7 @@ object GlobalState {
         return serviceEngine?.plugins?.get(VpnPlugin::class.java) as VpnPlugin?
     }
 
+    // 磁贴：VPN开关
     fun handleToggle() {
         val starting = handleStart()
         if (!starting) {
@@ -87,6 +91,7 @@ object GlobalState {
         }
     }
 
+    // 执行service的Flutter Engine -> 指定Dart入口点（立即执行）
     fun initServiceEngine() {
         if (serviceEngine != null) return
         destroyServiceEngine()

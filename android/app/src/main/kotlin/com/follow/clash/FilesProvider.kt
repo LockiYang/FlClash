@@ -13,6 +13,7 @@ import java.io.FileNotFoundException
 
 class FilesProvider : DocumentsProvider() {
 
+    // 伴生对象，类似于Java的static
     companion object {
         private const val DEFAULT_ROOT_ID = "0"
 
@@ -36,7 +37,7 @@ class FilesProvider : DocumentsProvider() {
     override fun onCreate(): Boolean {
         return true
     }
-
+    // 查询应用的根目录
     override fun queryRoots(projection: Array<String>?): Cursor {
         return MatrixCursor(projection ?: DEFAULT_ROOT_COLUMNS).apply {
             newRow().apply {
@@ -50,7 +51,7 @@ class FilesProvider : DocumentsProvider() {
         }
     }
 
-
+    // 查询制定父目录中的文件和子目录
     override fun queryChildDocuments(
         parentDocumentId: String,
         projection: Array<String>?,

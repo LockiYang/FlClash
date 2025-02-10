@@ -42,6 +42,17 @@ import java.io.File
 import java.lang.ref.WeakReference
 import java.util.zip.ZipFile
 
+// onMethodCall : Dart调用原生
+// moveTaskToBack：将当前任务移动到后台
+// updateExcludeFromRecents：设置应用是否从最近任务中排除
+// initShortcuts：
+// getPackages：异步获取已安装的应用信息
+// getChinaPackageNames：异步获取与中国相关的包名列表
+// getPackageIcon：根据包名获取应用图标
+// tip：显示Toast
+// openFile：打开指定路径的文件
+
+// MethodChannel : 原生调用Dart
 class AppPlugin : FlutterPlugin, MethodChannel.MethodCallHandler, ActivityAware {
 
     private var activityRef: WeakReference<Activity>? = null
@@ -117,12 +128,16 @@ class AppPlugin : FlutterPlugin, MethodChannel.MethodCallHandler, ActivityAware 
 
     private var isBlockNotification: Boolean = false
 
+    // 初始化插件
     override fun onAttachedToEngine(flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
+        // 协程作用域，用于处理异步任务
         scope = CoroutineScope(Dispatchers.Default)
         channel = MethodChannel(flutterPluginBinding.binaryMessenger, "app")
         channel.setMethodCallHandler(this)
     }
 
+    // 动态快捷方式（Dynamic Shortcut）
+    // Intent：打开 TempActivity，Action("CHANGE")
     private fun initShortcuts(label: String) {
         val shortcut = ShortcutInfoCompat.Builder(FlClashApplication.getAppContext(), "toggle")
             .setShortLabel(label)
@@ -140,11 +155,13 @@ class AppPlugin : FlutterPlugin, MethodChannel.MethodCallHandler, ActivityAware 
         )
     }
 
+    // 清理资源
     override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
         channel.setMethodCallHandler(null)
         scope.cancel()
     }
 
+    // flutterEngine未初始化时提示信息
     private fun tip(message: String?) {
         if (GlobalState.flutterEngine == null) {
             Toast.makeText(FlClashApplication.getAppContext(), message, Toast.LENGTH_LONG).show()
@@ -425,6 +442,9 @@ class AppPlugin : FlutterPlugin, MethodChannel.MethodCallHandler, ActivityAware 
         return false
     }
 
+    // Flutter插件的一种机制：用于在插件附加到 Activity 时触发回调
+    // 注册接收Activity结果监听：VpnPlugin.start时会requestVpnPermission（请求VPN权限），监听startActivityForResult
+    // 注册权限请求结果监听:ServicePlugin.init会调用requestNotificationsPermission（请求通知权限）
     override fun onAttachedToActivity(binding: ActivityPluginBinding) {
         activityRef = WeakReference(binding.activity)
         binding.addActivityResultListener(::onActivityResult)
