@@ -88,7 +88,7 @@ class GlobalState {
     );
   }
 
-  // 更新Clash配置到ClashCore
+  // 更新配置文件到ClashCore
   // isPatch: true 为增量更新，false 为全量更新
   // 传递currentProfileId，ClashCore会自动寻找对应的profile文件
   Future<void> updateClashConfig({
@@ -173,6 +173,7 @@ class GlobalState {
     stopUpdateTasks();
   }
 
+  // 更新配置文件并更新策略组
   Future applyProfile({
     required AppState appState,
     required Config config,

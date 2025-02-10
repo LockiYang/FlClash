@@ -87,6 +87,7 @@ Future<void> _service(List<String> flags) async {
       },
     ),
   );
+  // flutterEngine主引擎（UI）不存在，仅serviceEngine（后台服务进程）存在
   if (!quickStart) {
     _handleMainIpc(clashLibHandler);
   } else {

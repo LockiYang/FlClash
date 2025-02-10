@@ -74,7 +74,7 @@ class AppController {
     );
   }
 
-  // 启动和停止Clash Core
+  // 启动和停止ClashCore
   updateStatus(bool isStart) async {
     if (isStart) {
       await globalState.handleStart([
@@ -643,25 +643,26 @@ class AppController {
     return appState.viewMode == ViewMode.mobile;
   }
 
-  // desktop: 开关Tun虚拟网卡，仅支持windows
+  // for desktop托盘和快捷键: 开关Tun虚拟网卡
   updateTun() {
     clashConfig.tun = clashConfig.tun.copyWith(
       enable: !clashConfig.tun.enable,
     );
   }
 
-  // desktop: 开关系统代理
+  // for desktop托盘和快捷键: 开关系统代理
   updateSystemProxy() {
     config.networkProps = config.networkProps.copyWith(
       systemProxy: !config.networkProps.systemProxy,
     );
   }
 
-  // 开关代理
+  // for desktop托盘和快捷键: 开关代理
   updateStart() {
     updateStatus(!appFlowingState.isStart);
   }
 
+  // for desktop托盘和快捷键: 切换代理模式
   changeMode(Mode mode) {
     clashConfig.mode = mode;
     if (mode == Mode.global) {
@@ -670,7 +671,7 @@ class AppController {
     addCheckIpNumDebounce();
   }
 
-  // 开关自启动
+  // for desktop托盘: 开关自启动
   updateAutoLaunch() {
     config.appSetting = config.appSetting.copyWith(
       autoLaunch: !config.appSetting.autoLaunch,

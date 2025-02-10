@@ -42,12 +42,12 @@ List<DashboardWidget> dashboardWidgetsRealFormJson(
 /// App应用设置
 ///
 /// locale            语言
-/// onlyProxy         是否只统计代理流量
+/// onlyStatisticsProxy         是否只统计代理流量
 /// autoLaunch        自启动 desktop
 /// adminAutoLaunch   管理员自启动 desktop
 /// silentLaunch      静默启动，不显示窗口 desktop
 /// autoRun           启动时自动运行VPN
-/// openLogs
+/// openLogs          是否启动 ClashCore 的日志
 /// closeConnections  切换节点后是否关闭所有连接
 /// testUrl           测速链接
 /// isAnimateToPage   Android页面切换动画
