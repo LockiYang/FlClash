@@ -11,6 +11,20 @@ import 'package:intl/intl.dart';
 
 /// for android
 /// App插件
+/// 
+/// 处理原生调用
+/// exit：触发 onExit 回调
+/// getText：国际化
+/// 
+/// 调用原生
+/// moveTaskToBack：移动到后台
+/// getPackages：获取所有应用
+/// getChinaPackageNames：获取中国应用包名
+/// openFile：通过 "openFile" 方法请求原生打开指定文件
+/// getPackageIcon：获取某个应用的图标
+/// tip：在原生端显示提示信息
+/// initShortcuts：初始化快捷方式
+/// updateExcludeFromRecents：修改应用是否从最近任务中排除
 class App {
   static App? _instance;
   late MethodChannel methodChannel;

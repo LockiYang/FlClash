@@ -9,7 +9,6 @@ import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 
 // serviceEngine的启动和销毁
-// 供dart调用
 data object ServicePlugin : FlutterPlugin, MethodChannel.MethodCallHandler {
 
     private lateinit var flutterMethodChannel: MethodChannel

@@ -16,6 +16,11 @@ abstract mixin class TileListener {
 
 /// for android
 /// 磁贴，通知栏快捷菜单插件
+/// 
+/// 处理原生调用
+/// start：触发监听器 onStart 回调
+/// stop：触发监听器 onStop 回调
+/// detached：触发监听器 onDetached 回调
 class Tile {
 
   final MethodChannel _channel = const MethodChannel('tile');

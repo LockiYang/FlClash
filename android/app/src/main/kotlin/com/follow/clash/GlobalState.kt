@@ -20,6 +20,9 @@ enum class RunState {
 
 // object 用于创建单例对象或静态工具类
 // 不需要手动实例化、自动是一个单例对象
+// FlutterEngine：主要用于执行Dart代码，与原生通信，与UI线程不在同一个线程
+// flutterEngine：MainActivity创建的默认FlutterEngine
+// serviceEngine：用于执行_service clashlib.so FFI
 object GlobalState {
     val runLock = ReentrantLock()
 

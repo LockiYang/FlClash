@@ -61,7 +61,7 @@ Future<void> main() async {
 }
 
 // 原生调用Dart的入口
-// 利用 DartExecutor 动态绑定 Dart 函数，灵活实现跨平台调用
+// 不会调用state、controller、application中代码
 // VpnPlugin.start 时调用此函数
 // 确保不会被树摇优化（编译优化，移除未使用的代码）去除
 @pragma('vm:entry-point')
@@ -134,6 +134,8 @@ Future<void> _service(List<String> flags) async {
       },
     ),
   );
+
+  // 监听 ClashCore 的消息
   final invokeReceiverPort = ReceivePort();
   clashLibHandler.attachInvokePort(
     invokeReceiverPort.sendPort.nativePort,
@@ -144,6 +146,7 @@ Future<void> _service(List<String> flags) async {
       switch (invokeMessage.type) {
         case InvokeMessageType.protect:
           final fd = Fd.fromJson(invokeMessage.data);
+          // 最终会调用 VPNService.protect(fd)
           await vpn?.setProtect(fd.value);
           clashLibHandler.setFdMap(fd.id);
         case InvokeMessageType.process:
@@ -165,12 +168,16 @@ _handleMainIpc(ClashLibHandler clashLibHandler) {
   if (sendPort == null) {
     return;
   }
+  // 监听mainIsolate发送的消息
   final serviceReceiverPort = ReceivePort();
   serviceReceiverPort.listen((message) async {
     final res = await clashLibHandler.invokeAction(message);
     sendPort.send(res);
   });
+  // 让mainIsolate知道自己的 ReceivePort
   sendPort.send(serviceReceiverPort.sendPort);
+
+  // 监听clashLib消息，把消息转发到mainIsolate
   final messageReceiverPort = ReceivePort();
   clashLibHandler.attachMessagePort(
     messageReceiverPort.sendPort.nativePort,

@@ -37,19 +37,6 @@ import kotlinx.coroutines.withContext
 import java.net.InetSocketAddress
 import kotlin.concurrent.withLock
 
-// Dart调用原生：onMethodCall
-// start：bindService、start VPNService、回调Dart started(startTun)
-// stop：
-// setProtect：
-// startForeground：
-// resolverProcess：
-
-// 原生调用Dart：MethodChannel
-// gc
-// dnsChanged
-// started
-
-// 网络状态监控，并回调到Dart层
 // flClashService是FlClashService还是FlClashVpnService 取决于：VpnOptions.enable
 data object VpnPlugin : FlutterPlugin, MethodChannel.MethodCallHandler {
     private lateinit var flutterMethodChannel: MethodChannel

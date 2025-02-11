@@ -4,11 +4,7 @@ import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 
-// 开关磁贴插件，
-// 点击磁贴时调用Dart代码：handleStart、handleStop调用FFI startCore
-//
-// MethodChannel：原生调用Dart
-// onMethodCall：Dart调用原生
+// 磁贴插件
 class TilePlugin : FlutterPlugin, MethodChannel.MethodCallHandler {
 
     private lateinit var channel: MethodChannel

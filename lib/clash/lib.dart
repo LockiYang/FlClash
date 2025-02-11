@@ -189,6 +189,7 @@ class ClashLib extends ClashHandlerInterface with AndroidClashInterface {
   }
 }
 
+// android 直接操作libclash.so
 class ClashLibHandler {
   static ClashLibHandler? _instance;
 

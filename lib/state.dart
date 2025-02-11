@@ -236,6 +236,7 @@ class GlobalState {
         config: config,
         clashConfig: clashConfig,
       );
+      // android 非service才会执行
       clashLib?.setState(
         getCoreState(config, clashConfig),
       );

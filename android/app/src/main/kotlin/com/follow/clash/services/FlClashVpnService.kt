@@ -35,8 +35,6 @@ import kotlinx.coroutines.launch
 class FlClashVpnService : VpnService(), BaseServiceInterface {
     override fun onCreate() {
         super.onCreate()
-        // 创建时 执行dart：vpnService
-        // Dart虚拟机执行 vpnService入口点 -> 通过FFI调用本地库
         GlobalState.initServiceEngine()
     }
 
