@@ -47,6 +47,7 @@ class GlobalState {
 
   bool get isStart => startTime != null && startTime!.isBeforeNow;
 
+  // 1秒更新一次ClashCore流量和运行时间
   startUpdateTasks([UpdateTasks? tasks]) async {
     if (timer != null && timer!.isActive == true) return;
     if (tasks != null) {
@@ -141,6 +142,8 @@ class GlobalState {
     startTime ??= DateTime.now();
   }
 
+  // for desktop
+  // 重启ClashCore
   restartCore({
     required AppState appState,
     required ClashConfig clashConfig,

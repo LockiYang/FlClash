@@ -10,7 +10,7 @@ import 'package:window_ext/window_ext.dart';
 import 'package:window_manager/window_manager.dart';
 
 /// for desktop
-/// 窗口的移动、大小调整、最小化和关闭
+/// 监听窗口的移动、大小调整、最小化和关闭
 class WindowManager extends StatefulWidget {
   final Widget child;
 

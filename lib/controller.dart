@@ -272,6 +272,8 @@ class AppController {
   }
 
   // 退后或者关闭应用
+  // desktop点击窗口关闭按钮，判断时关闭应用还是最小化
+  // android点击返回键，判断时关闭应用还是最小化
   handleBackOrExit() async {
     if (config.appSetting.minimizeOnExit) {
       if (system.isDesktop) {
@@ -296,7 +298,7 @@ class AppController {
     }
   }
 
-  // 应用更新
+  // App更新检查
   autoCheckUpdate() async {
     if (!config.appSetting.autoCheckUpdate) return;
     final res = await request.checkForUpdate();

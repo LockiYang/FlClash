@@ -56,6 +56,8 @@ class Application extends StatefulWidget {
   State<Application> createState() => ApplicationState();
 }
 
+// 20分钟更新一次Profile
+// 20秒更新一次Group
 class ApplicationState extends State<Application> {
   late SystemColorSchemes systemColorSchemes;
   Timer? _autoUpdateGroupTaskTimer;
