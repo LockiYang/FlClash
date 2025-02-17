@@ -30,10 +30,11 @@ abstract mixin class VpnListener {
 /// windows:
 ///
 /// startVPN按钮点击时，调用service.startVpn
-/// 1. 创建 TUN 接口：VPNService.establish() 创建TUN接口，detachFd()分离出底层的文件描述符fd
-/// 2. 将 fd 回调出来给 ClashCore（clashLibHandler.startTun(fd)），让它接管流量
-/// 3. 监听ClashCore消息调用 VPNService.protect(fd)，保护 ClashCore 流量不被路由到 TUN 接口，避免死循环
-/// 4. ClashCore根据规则（如代理、直连或屏蔽）处理数据包，然后通过真实的网络接口发送
+/// 1. requestVpnPermission 
+/// 2. 调用 VpnService.start，VPNService.establish() 创建TUN接口，detachFd()分离出底层的文件描述符fd
+/// 2. 回调 Dart层 started，将 fd 传递给 Clash 核心（clashcore.startTun(fd)），让它接管流量
+/// 3. 调用 VPNService.protect(fd)，保护 Clash 核心流量不被路由到 TUN 接口，避免死循环
+/// 4. Clash 核心根据规则（如代理、直连或屏蔽）处理数据包，然后通过真实的网络接口发送
 ///
 ///
 /// 处理来自原生的调用

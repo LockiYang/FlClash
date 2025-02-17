@@ -250,6 +250,7 @@ data object VpnPlugin : FlutterPlugin, MethodChannel.MethodCallHandler {
     }
 
     private fun handleStartService() {
+        // flClashService是FlClashService还是FlClashVpnService 取决于：VpnOptions.enable
         if (flClashService == null) {
             bindService()
             return
